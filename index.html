@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Stone Paper Scissors Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: lightskyblue;
+        }
+        .main {
+            border: 2px solid black;
+            width: 600px;
+            margin: auto;
+            padding: 1rem;
+            background-color: rgb(194, 243, 236);
+        }
+        button {
+            color: #fff;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        button img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+        }
+
+        img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50px;
+        }
+
+        button:hover {
+            background-color: #464646;
+        }
+
+        #result #tex {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .inputpic {
+            display: none;
+        }
+
+        #playagain {
+            height: 3rem;
+            width: 15rem;
+            border-radius: 50px;
+            color: black;
+        }
+
+        #playagin:hover {
+            background-color: rgb(192, 190, 190);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>Stone Paper Scissors Game</h1>
+        <button id="stone"><img src="assets/download.jpeg" alt="stone"></button>
+        <button id="paper"><img src="assets/paper.jpeg" alt="paper"></button>
+        <button id="scissors"><img src="assets/scissor.jpeg" alt="scissor"></button>
+        <div class="img">
+            <p id="input">
+                <img src="assets/download.jpeg" alt="stone" class="inputpic" id="st">
+                <img src="assets/paper.jpeg" alt="paper" class="inputpic" id="pa">
+                <img src="assets/scissor.jpeg" alt="scissor" class="inputpic" id="sc">
+            </p>
+            <h1>VS</h1>
+            <p id="Computer">
+                <img src="assets/download.jpeg" alt="stone" class="inputpic" id="sto">
+                <img src="assets/paper.jpeg" alt="paper" class="inputpic" id="pap">
+                <img src="assets/scissor.jpeg" alt="scissor" class="inputpic" id="sci">
+            </p>
+        </div>
+        <p id="tex"></p>
+        <p id="result"></p>
+        <div>
+            <button id="playagain">Play again</button>
+        </div>
+
+    </div>
+
+    <script>
+        const stone = document.getElementById("stone");
+        const paper = document.getElementById("paper");
+        const scissors = document.getElementById("scissors");
+        const result = document.getElementById("result");
+        const tex = document.getElementById("tex");
+        const st = document.getElementById("st");
+        const pa = document.getElementById("pa");
+        const sc = document.getElementById("sc");
+        const sci = document.getElementById("sci");
+        const sto = document.getElementById("sto");
+        const pap = document.getElementById("pap");
+        const playagain = document.getElementById("playagain");
+
+
+        let playerChoice = "";
+        let computerChoice = "";
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function getComputerChoice() {
+            const choices = ["stone", "paper", "scissors"];
+            var x = choices[Math.floor(Math.random() * 3)];;
+            return choices[Math.floor(Math.random() * 3)];
+        }
+
+        function checkWinner() {
+            st.className = "inputpic";
+            pa.className = "inputpic";
+            sc.className = "inputpic";
+
+            sto.className = "inputpic";
+            pap.className = "inputpic";
+            sci.className = "inputpic";
+
+            if (computerChoice === "stone") {
+                sto.className = "";
+            }
+            else if (computerChoice === "paper") {
+                pap.className = "";
+            }
+            else {
+                sci.className = "";
+            }
+            if (playerChoice === computerChoice) {
+                result.textContent = "It's a tie!";
+            } else if (
+                (playerChoice === "stone" && computerChoice === "scissors") ||
+                (playerChoice === "paper" && computerChoice === "stone") ||
+                (playerChoice === "scissors" && computerChoice === "paper")
+            ) {
+                result.textContent = "You win!";
+                playerScore++;
+            } else {
+                result.textContent = "Computer wins!";
+                computerScore++;
+            }
+            tex.textContent = result.textContent;
+        }
+
+        function updateScore() {
+            result.textContent = `Score: You - ${playerScore}, Computer - ${computerScore}`;
+
+        }
+
+        stone.addEventListener("click", function () {
+            playerChoice = "stone";
+            computerChoice = getComputerChoice();
+            checkWinner();
+            updateScore();
+            st.className = "";
+        });
+
+        paper.addEventListener("click", function () {
+            playerChoice = "paper";
+            computerChoice = getComputerChoice();
+            checkWinner();
+            updateScore();
+            pa.className = "";
+        });
+
+        scissors.addEventListener("click", function () {
+            playerChoice = "scissors";
+            computerChoice = getComputerChoice();
+            checkWinner();
+            updateScore();
+            sc.className = "";
+        });
+
+        playagain.addEventListener("click", function () {
+            location.href = "hi.html"
+        })
+    </script>
+</body>
+
+</html>
